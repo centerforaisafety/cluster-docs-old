@@ -1,0 +1,23 @@
+# Setup
+title:               CAIS Compute Cluster
+tagline:             'Resources and Documentation'
+description:         'Extra Resources.'
+# url:                 https://cluster.safe.ai
+url:                 https://centerforaisafety.github.io/cluster-docs
+baseurl:             ''
+paginate:            5
+permalink:           pretty
+
+# About/contact
+author:
+  name:              Steven Basart
+  url:               https://safe.ai
+  email:             contact@safe.ai
+
+# Gems
+plugins:
+  - jekyll-paginate
+
+# Custom vars
+version:             1.0
+google_analytics_id: #UA-XXXX-Y
