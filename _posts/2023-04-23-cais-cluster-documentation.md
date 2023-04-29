@@ -12,10 +12,14 @@ title: Welcome to the Center for AI Safety Cluster
 1. [Getting Started](#getting-started)
     1. [Getting Cluster Access](#getting-cluster-access)
     1. [Getting Help](#getting-help)
+    1. [Basic Cluster Usage Example](#basic-cluster-usage-example)
     1. [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
     1. [Suggested Installations](#suggested-installations)
+1. [SLURM Notes](#slurm-notes)
+    1. [SLURM Example Commands](#slurm-example-commands)
 1. [Specific Topics](#specfic-topics)
     1. [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
+    1. [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
     1. [Installing cmake](#installing-cmake)
     1. [Old GCC, G++, Glibc](#how-to-update-gcc,-g++,-or-glibc)
     1. [Example sbatch file](#example-sbatch-file)
@@ -58,6 +62,10 @@ Test out requesting a node.
 # request 1 cpu on 1 node
 srun --pty bash
 
+# Exit from the compute node to request a new node
+exit  # or hit Ctrl+d
+
+# On the login node again
 # request any 2 gpus available
 srun --gpus=2 --pty bash
 ```
@@ -95,8 +103,10 @@ Important note: Please do not do any work on the login node. This includes insta
 ## SLURM Example Commands
 
 ```bash
+# From the login node
 srun --gpus=2 --pty bash  # requests two GPUs to run interactively
 
+# The rest of the commands will work from any node
 sbatch launch.sbatch      # Start a job and place it in the queue
 
 scancel #JOB_NUM#         # Pass in the Job number for a specific job to cancel.
@@ -149,6 +159,21 @@ ssh -t -t cais_cluster -L $NODEPORT:localhost:$NODEPORT ssh -N compute-permanent
 ```
 
 Finally open up the browser and paste in the link
+
+## Switching shell such as to ZSH
+
+Add the following to the end of your `.bashrc` file which shell you'd like to run.  They are by default installed into `/usr/bin/`
+
+```
+# Run zsh
+if [ "$SHELL" != "/usr/bin/zsh" ]
+then
+    export SHELL="/usr/bin/zsh"
+    exec /usr/bin/zsh
+fi
+```
+
+If you're favorite shell is not installed on the system just ask us to add it.
 
 ## Installing cmake
 
