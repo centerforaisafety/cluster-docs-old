@@ -25,7 +25,7 @@ title: Welcome to the Center for AI Safety Cluster
     1. [Example sbatch file](#example-sbatch-file)
     1. [Docker Support](#docker-support)
 1. Links to other pages
-    1. [Distributed Training Example]({{ site.baseurl }}{% post_url 2023-04-22-distributed-training-example %})
+    1. [Distributed Training Example]({% post_url 2023-04-22-distributed-training-example %})
 1. External Resources 
     1. [The SLURM section is similar to how our cluster works](https://rc-docs.northeastern.edu/en/latest/using-discovery/usingslurm.html)
 
