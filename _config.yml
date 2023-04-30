@@ -3,8 +3,9 @@ title:                CAIS Compute Cluster
 tagline:              'Resources and Documentation'
 description:          'Extra Resources.'
 # url:                https://cluster.safe.ai
-url:                  https://centerforaisafety.github.io/cluster-docs
-baseurl:              ''
+url:                  https://centerforaisafety.github.io/
+# baseurl:              ''
+baseurl:              'cluster-docs/'
 paginate:             5
 permalink:            pretty
 
