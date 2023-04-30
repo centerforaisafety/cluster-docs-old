@@ -3,6 +3,8 @@ layout: post
 title: Distributed Training Example
 ---
 
+## Basic Example
+
 The following requires pytorch 2.0.  The example though is meant to be simple enough to be a starting point.
 
 The following file is the `launch.sbatch`. You run it with `sbatch launch.sbatch`.
@@ -67,4 +69,19 @@ def demo_basic():
 
 if __name__ == "__main__":
     demo_basic()
+```
+
+## Enable Debugging for when things go wrong
+
+This allows for tracebacks to be recorded.
+
+```python
+from torch.distributed.elastic.multiprocessing.errors import record
+
+# Note main should be the main entry point of the code not just a random function. 
+# It won't work if your whole code is not in a function for instance.
+@record
+def main():
+    ... # rest of code
+
 ```
