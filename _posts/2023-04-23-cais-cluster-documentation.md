@@ -164,7 +164,7 @@ Finally open up the browser and paste in the link
 
 ## Switching shell such as to ZSH
 
-Add the following to the end of your `.bashrc` file which shell you'd like to run.  They are by default installed into `/usr/bin/`
+Add the following to the end of your `.bashrc` file which shell you'd like to run.  The different shells are by default installed into `/usr/bin/`
 
 ```
 # Run zsh
