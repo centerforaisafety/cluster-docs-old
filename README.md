@@ -1,6 +1,22 @@
 # cluster-docs
 
-## Initial Setup
+## How to preview Changes
+
+Install ruby
+Install gems
+Install [jekyll](https://jekyllrb.com/docs/installation/)
+
+Then
+
+```
+cd cluster-docs
+bundle install
+bundle exec jekyll serve --watch --config _testconfig.yml
+```
+
+Open up [localhost:4000](http://localhost:4000)
+
+## (Old From scratch) Initial Setup
 
 We used the [lanyon theme](https://github.com/poole/lanyon).
 
