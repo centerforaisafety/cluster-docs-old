@@ -17,6 +17,8 @@ title: Welcome to the Center for AI Safety Cluster
     1. [Suggested Installations](#suggested-installations)
 1. [SLURM Notes](#slurm-notes)
     1. [SLURM Example Commands](#slurm-example-commands)
+1. [Package Management](#package-management)
+    1. [Nix Package Manager](#nix-package-manager)
 1. [Specific Topics](#specfic-topics)
     1. [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
     1. [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
@@ -73,6 +75,81 @@ srun --gpus=2 --pty bash
 ```
 
 Please note that `--gpus=X` will request X gpus although not necessarily all guaranteed to be on the same node but almost always does assuming you request X < 8.
+
+# Package Management
+## Nix Package Manager
+
+Nix is a package manager for Linux and other Unix systems, with a wide selection of up-to-date packages. This document is a brief introduction to Nix and how to use it. 
+
+### How to find packages:
+Use `nix-search`, an alias for `nix search nixpkgs#`, to search for packages.
+
+Examples
+```bash
+# Search for packages with bash function:
+$ nix-search hello
+```
+
+### How to install packages:
+Use `nix-install`, a convienient alias for `nix profile install nixpkgs#`, to install packages.
+
+Examples
+```bash
+# Install a package(s) with bash function:
+$ nix-install hello
+$ nix-install hello llvm
+
+# Install a package from a specific branch:
+$ nix profile install nixpkgs/release-20.09#hello
+```
+
+### How to list installed packages:
+Use `nix-list`, an alias for `nix profile list`, to list installed pacakges.
+
+Examples
+```bash
+# List installed packages with bash function:
+$ nix-list
+```
+
+### How to remove packages:
+Use `nix-list` with `grep` to find a package's id. Use `nix-remove`, an alias for `nix profile remove`, to remove packages.
+
+Examples
+```bash
+# Remove a specific package by id:
+$ nix-list | grep hello
+> 1 flake:nixpkgs# ... 2rf7qm44j-hello-2.12.1
+# The number at the beginning of the output line above is the package id.
+
+# Use the package id to remove the package
+$ nix-remove 1
+> removing 'flake:nixpkgs#legacyPackages.aarch64-darwin.hello'
+```
+
+### How to upgrade packages:
+Use `nix-list` with `grep` to find a package's id. Use `nix-upgrade`, an alias for `nix profile upgrade`, to upgrade packages.
+
+Examples
+```bash
+# Upgrade all packages that are installed:
+$ nix-upgrade '.*'
+
+# Upgrade a specific package by id:
+$ nix-list | grep hello
+> 1 flake:nixpkgs# ... 2rf7qm44j-hello-2.12.1
+# The number at the beginning of the output line above is the package id.
+
+# Use the package id to upgrade the package
+$ nix-upgrade 1
+```
+
+### Additional Resources:
+This tool is powerful and has a lot of functionality that we haven't covered. For more information, about Nix and its value proposition as well as the Nix command, check out the links below.    
+
+[Why Nix?](https://nixos.org/explore.html)  
+[Nix command documentation](https://nixos.org/manual/nix/stable/command-ref/experimental-commands.html)
+
 
 ## Install Miniconda or Anaconda
 
