@@ -26,6 +26,7 @@ title: Welcome to the Center for AI Safety Cluster
     1. [Old GCC, G++, Glibc](#how-to-update-gcc,-g++,-or-glibc)
     1. [Example sbatch file](#example-sbatch-file)
     1. [Docker Support](#docker-support)
+    1. [Configuring Notifications](#configuring-notifications)
 1. Links to other pages
     1. [Distributed Training Example]({% post_url 2023-04-22-distributed-training-example %})
 1. External Resources 
@@ -304,3 +305,24 @@ sleep 5
 
 We are actively working on this.  Please poke us in the slack if you want this support sooner and we can either reprioritize it or give you our status update on it.
 
+## Configuring Notifications
+
+We have configured Slurm for sending email and slack notifications for various job stages (begin, fail, requeue, complete, etc) from the `do-not-reply@safe.ai` email address (check spam). It is also capable of interfacing with other notification platforms, so if you would like us to configure it for another platform, let us know and we will look into it. We are using the [goslmailer](https://github.com/CLIP-HPC/goslmailer) for the notifications.
+
+You can add notifications to your job by adding the following lines to your SBATCH file:
+
+```bash
+#SBATCH --mail-user=mailto:{email},slack:{slack-member-id}
+#SBATCH --mail-type=ALL
+```
+
+Feel free to replace `{email}` with one of your choice and `{slack-member-id}` with your personal one for the CAIS Compute Cluster workspace ([how to find your member id](https://www.workast.com/help/article/how-to-find-a-slack-user-id/)). If you would only like to use slack or email for notifications and not the other, you can do this by only including that service in your sbatch.
+
+Example:
+
+```bash
+#SBATCH --mail-user=mailto:{email}
+#SBATCH --mail-type=ALL
+```
+
+You can also configure the messages with all the [mail-type options](https://slurm.schedmd.com/sbatch.html#OPT_mail-type) found in Slurm by default.  
