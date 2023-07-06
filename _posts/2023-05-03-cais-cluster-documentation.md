@@ -10,23 +10,24 @@ title: Welcome to the Center for AI Safety Cluster
 
 # Table of Contents
 1. [Getting Started](#getting-started)
-    1. [Getting Cluster Access](#getting-cluster-access)
-    1. [Getting Help](#getting-help)
-    1. [Basic Cluster Usage Example](#basic-cluster-usage-example)
-    1. [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
-    1. [Suggested Installations](#suggested-installations)
-1. [SLURM Notes](#slurm-notes)
-    1. [SLURM Example Commands](#slurm-example-commands)
+   1. [Getting Cluster Access](#getting-cluster-access)
+   1. [Getting Help](#getting-help)
+   1. [Basic Cluster Usage Example](#basic-cluster-usage-example)
 1. [Package Management](#package-management)
-    1. [Nix Package Manager](#nix-package-manager)
-1. [Specific Topics](#specfic-topics)
-    1. [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
-    1. [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
-    1. [Installing cmake](#installing-cmake)
-    1. [Old GCC, G++, Glibc](#how-to-update-gcc,-g++,-or-glibc)
-    1. [Example sbatch file](#example-sbatch-file)
-    1. [Docker Support](#docker-support)
-    1. [Configuring Notifications](#configuring-notifications)
+   1. [Nix Package Manager](#nix-package-manager)
+   1. [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
+   1. [Suggested Installations](#suggested-installations)
+1. [SLURM Notes](#slurm-notes)
+   1. [SLURM Example Commands](#slurm-example-commands)
+1. [Specific Topics](#specific-topics)
+   1. [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
+   1. [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
+   1. [Installing cmake](#installing-cmake)
+   1. [How to update gcc, g++, or glibc](#how-to-update-gcc-g-or-glibc)
+      1. [Example sbatch file](#example-sbatch-file)
+   1. [Docker Support](#docker-support)
+   1. [Configuring Notifications](#configuring-notifications)
+   1. [VS Code on the Cluster](#vs-code-on-the-cluster)
 1. Links to other pages
     1. [Distributed Training Example]({% post_url 2023-04-22-distributed-training-example %})
 1. External Resources 
@@ -326,3 +327,14 @@ Example:
 ```
 
 You can also configure the messages with all the [mail-type options](https://slurm.schedmd.com/sbatch.html#OPT_mail-type) found in Slurm by default.  
+
+## VS Code on the Cluster
+
+In our investigations some extensions such as ai autocomplete tools (tabNine and Copilot) have significant cpu utilization. At the moment these are not a problem but we may have to disable these extensions if their usage increases. The main performance impact of VS Code on the cluster is RAM usage, which is nearly entirely decided by the number of extensions installed. This is also impacted by the size of the working directory that you have open in VS Code. Thus we suggest being mindful of how many extensions you install as more than 10 will begin to impact the responsiveness of your connection to the cluster (may vary slightly depending on the extensions).
+
+There are two primary extensions you can use to develop remotely using VS Code. The first, [Remote SSH extension](https://code.visualstudio.com/docs/remote/ssh), can easily be setup for use with the server using the [example ssh setup](#basic-cluster-usage-example). We do require you to change one setting for this extension:
+- Go to the extension settings and paste `remote.SSH.remoteServerListenOnSocket` into the search bar at the top. Then make sure the option has a checkmark (disabled by default).
+
+The second option is the [Remote Tunnel extension](https://code.visualstudio.com/docs/remote/tunnels). This extension requires you to ssh into the server in a normal terminal window then run the service manually. It is, however, easier to use on an interactive session of a compute node than Remote SSH and allows you to develop in a browser (and/or the desktop application). We strongly encourage you to run the installation commands from your home directory on the cluster (`/data/yourname`) so the VS Code folders are created with the correct privacy permissions. 
+
+Both of these extensions deliver nearly identical development experiences and differ only in their connection method to the server.
