@@ -54,7 +54,7 @@ Once granted access please login to slack and message us in #help-desk channel. 
 Once you've given us your ssh key and we've set you up. SSH onto the login node.
 
 ```bash
-ssh  -i {path-to-private-key} {username}@{cluster-login-node-ip}
+ssh  -i {path-to-private-key} {username}@compute.safe.ai
 
 # Alternatively configure your .ssh/config file to make a nice short version
 ssh cais
@@ -89,7 +89,7 @@ Use `nix-search`, an alias for `nix search nixpkgs#`, to search for packages.
 Examples
 ```bash
 # Search for packages with bash function:
-$ nix-search hello
+nix-search hello
 ```
 
 ### How to install packages:
@@ -98,11 +98,11 @@ Use `nix-install`, a convienient alias for `nix profile install nixpkgs#`, to in
 Examples
 ```bash
 # Install a package(s) with bash function:
-$ nix-install hello
-$ nix-install hello llvm
+nix-install hello
+nix-install hello llvm
 
 # Install a package from a specific branch:
-$ nix profile install nixpkgs/release-20.09#hello
+nix profile install nixpkgs/release-20.09#hello
 ```
 
 ### How to list installed packages:
@@ -111,7 +111,7 @@ Use `nix-list`, an alias for `nix profile list`, to list installed pacakges.
 Examples
 ```bash
 # List installed packages with bash function:
-$ nix-list
+nix-list
 ```
 
 ### How to remove packages:
@@ -120,12 +120,12 @@ Use `nix-list` with `grep` to find a package's id. Use `nix-remove`, an alias fo
 Examples
 ```bash
 # Remove a specific package by id:
-$ nix-list | grep hello
+nix-list | grep hello
 > 1 flake:nixpkgs# ... 2rf7qm44j-hello-2.12.1
 # The number at the beginning of the output line above is the package id.
 
 # Use the package id to remove the package
-$ nix-remove 1
+nix-remove 1
 > removing 'flake:nixpkgs#legacyPackages.aarch64-darwin.hello'
 ```
 
@@ -135,15 +135,15 @@ Use `nix-list` with `grep` to find a package's id. Use `nix-upgrade`, an alias f
 Examples
 ```bash
 # Upgrade all packages that are installed:
-$ nix-upgrade '.*'
+nix-upgrade '.*'
 
 # Upgrade a specific package by id:
-$ nix-list | grep hello
+nix-list | grep hello
 > 1 flake:nixpkgs# ... 2rf7qm44j-hello-2.12.1
 # The number at the beginning of the output line above is the package id.
 
 # Use the package id to upgrade the package
-$ nix-upgrade 1
+nix-upgrade 1
 ```
 
 ### Additional Resources:
