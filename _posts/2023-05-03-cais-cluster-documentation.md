@@ -8,30 +8,33 @@ title: Welcome to the Center for AI Safety Cluster
 - toc
 {: toc } -->
 
-# Table of Contents
-1. [Getting Started](#getting-started)
-   1. [Getting Cluster Access](#getting-cluster-access)
-   1. [Getting Help](#getting-help)
-   1. [Basic Cluster Usage Example](#basic-cluster-usage-example)
-1. [Package Management](#package-management)
-   1. [Nix Package Manager](#nix-package-manager)
-   1. [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
-   1. [Suggested Installations](#suggested-installations)
-1. [SLURM Notes](#slurm-notes)
-   1. [SLURM Example Commands](#slurm-example-commands)
-1. [Specific Topics](#specific-topics)
-   1. [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
-   1. [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
-   1. [Installing cmake](#installing-cmake)
-   1. [How to update gcc, g++, or glibc](#how-to-update-gcc-g-or-glibc)
-      1. [Example sbatch file](#example-sbatch-file)
-   1. [Docker Support](#docker-support)
-   1. [Configuring Notifications](#configuring-notifications)
-   1. [VS Code on the Cluster](#vs-code-on-the-cluster)
-1. Links to other pages
-    1. [Distributed Training Example]({% post_url 2023-04-22-distributed-training-example %})
-1. External Resources 
-    1. [The SLURM section is similar to how our cluster works](https://rc-docs.northeastern.edu/en/latest/using-discovery/usingslurm.html)
+# Table of Contents  <!-- omit from toc -->
+- [Getting Started](#getting-started)
+    - [Getting Cluster Access](#getting-cluster-access)
+    - [Getting Help](#getting-help)
+    - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
+    - [Basic Cluster Usage Example](#basic-cluster-usage-example)
+        - [Example sbatch file](#example-sbatch-file)
+- [Package Management](#package-management)
+    - [Nix Package Manager](#nix-package-manager)
+        - [How to find packages](#how-to-find-packages)
+        - [How to install packages](#how-to-install-packages)
+        - [How to list installed packages](#how-to-list-installed-packages)
+        - [How to remove packages](#how-to-remove-packages)
+        - [How to upgrade packages](#how-to-upgrade-packages)
+        - [Additional Resources](#additional-resources)
+    - [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
+    - [Suggested Installations](#suggested-installations)
+- [SLURM Notes](#slurm-notes)
+    - [SLURM Example Commands](#slurm-example-commands)
+- [Specific Topics](#specific-topics)
+    - [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
+    - [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
+    - [Installing cmake](#installing-cmake)
+    - [How to update gcc, g++, or glibc](#how-to-update-gcc-g-or-glibc)
+    - [Docker Support](#docker-support)
+    - [Configuring Notifications](#configuring-notifications)
+    - [VS Code on the Cluster](#vs-code-on-the-cluster)
 
 # Getting Started
 
@@ -48,6 +51,10 @@ There is a [short form](https://www.safe.ai/compute-cluster) that one can apply 
 ## Getting Help
 
 Once granted access please login to slack and message us in #help-desk channel.  For questions before being granted access please direct them to [contact@safe.ai](mailto:contact@safe.ai). 
+
+## Sharing files and folders with other users
+
+For security measures, if you make your directory readable or executable by other users you will be locked out from `ssh`'ing into the cluster. This prevents other users from manipulating your ssh keys and such.  If you do wish to share we've made the directories `public_models`, `private_models` and `datasets`. Useable by everyone and you can share files and folders there.  If this does not work out please message us on slack for assistance.
 
 ## Basic Cluster Usage Example
 
@@ -72,18 +79,49 @@ srun --pty bash
 exit  # or hit Ctrl+d
 
 # On the login node again
-# request any 2 gpus available
+# request 2 gpus on 1 node
+srun --gpus-per-node=2 --pty bash
+
+# this is more convenient but can fail if you're doing multinode 
+# so we suggest the above command  
 srun --gpus=2 --pty bash
 ```
 
-Please note that `--gpus=X` will request X gpus although not necessarily all guaranteed to be on the same node but almost always does assuming you request X < 8.
+Note for some users you may need to add `--partition=single` before `--pty bash` when requesting a node.
+
+### Example sbatch file
+
+This is a quick example for running jobs non-interactively.  Putting them in the queue.  The suggested workflow is to debug and get things working with srun and then transition into putting jobs into the queue.
+
+This will request 1 gpu on 2 nodes so 2 gpus total. 
+It also specifies to run on the interactive partition. 
+Feel free to remove that line to have it run on the big partition.
+
+```bash
+#!/bin/bash
+#SBATCH --nodes=2
+#SBATCH --gpus-per-node=1
+#SBATCH --time=10:00
+#SBATCH --partition=interactive  # OPTIONAL can be removed to run on big/normal partition
+#SBATCH --job-name=Example 
+
+# Recommended way if you want to enable gcc version 10 for the "sbatch" session 
+source /opt/rh/devtoolset-10/enable
+
+gcc --version  # if you print it out again here it'll be version 10 
+
+python --version  # prints out the python version.  Replace this with a python call to whatever file.
+
+sleep 5
+```
 
 # Package Management
 ## Nix Package Manager
 
 Nix is a package manager for Linux and other Unix systems, with a wide selection of up-to-date packages. This document is a brief introduction to Nix and how to use it. 
 
-### How to find packages:
+### How to find packages
+
 Use `nix-search`, an alias for `nix search nixpkgs#`, to search for packages.
 
 Examples
@@ -92,7 +130,8 @@ Examples
 nix-search hello
 ```
 
-### How to install packages:
+### How to install packages
+
 Use `nix-install`, a convienient alias for `nix profile install nixpkgs#`, to install packages.
 
 Examples
@@ -105,7 +144,8 @@ nix-install hello llvm
 nix profile install nixpkgs/release-20.09#hello
 ```
 
-### How to list installed packages:
+### How to list installed packages
+
 Use `nix-list`, an alias for `nix profile list`, to list installed pacakges.
 
 Examples
@@ -114,7 +154,8 @@ Examples
 nix-list
 ```
 
-### How to remove packages:
+### How to remove packages
+
 Use `nix-list` with `grep` to find a package's id. Use `nix-remove`, an alias for `nix profile remove`, to remove packages.
 
 Examples
@@ -129,7 +170,8 @@ nix-remove 1
 > removing 'flake:nixpkgs#legacyPackages.aarch64-darwin.hello'
 ```
 
-### How to upgrade packages:
+### How to upgrade packages
+
 Use `nix-list` with `grep` to find a package's id. Use `nix-upgrade`, an alias for `nix profile upgrade`, to upgrade packages.
 
 Examples
@@ -146,7 +188,8 @@ nix-list | grep hello
 nix-upgrade 1
 ```
 
-### Additional Resources:
+### Additional Resources
+
 This tool is powerful and has a lot of functionality that we haven't covered. For more information, about Nix and its value proposition as well as the Nix command, check out the links below.    
 
 [Why Nix?](https://nixos.org/explore.html)  
@@ -175,7 +218,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvi
 
 ## Suggested Installations
 
-If you use tmux we recommend installing [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect).  This prevents the unfortunate case where if tmux dies so too do all your tabs.  With this app you can resurrect your sessions.
+If you use tmux we recommend installing [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect).  This prevents the unfortunate case where if tmux dies so too do all your tabs.  With this app you can resurrect your sessions (if you save them).
 
 # SLURM Notes
 
@@ -275,31 +318,6 @@ scl enable devtoolset-10 bash
 
 # The following enables LLVM.
 scl enable llvm-toolset-7.0 bash
-```
-
-### Example sbatch file
-
-This will request two gpus on each node so 4 gpus total. 
-It also specifies to run on the interactive partition. 
-Feel free to remove that line to have it run on the big partition.
-
-```bash
-#!/bin/bash
-#SBATCH --nodes=2
-#SBATCH --gpus-per-node=2
-#SBATCH --time=10:00
-#SBATCH --partition=interactive  # OPTIONAL can be removed to run on big/normal partition
-#SBATCH --job-name=Example 
-
-gcc --version # if you print it out here it'll be 4.8.5  
-sleep 5
-
-# Recommended way if you want to enable gcc version 10 for the "sbatch" session 
-source /opt/rh/devtoolset-10/enable
-
-gcc --version # if you print it out again here it'll be version 10 
-
-sleep 5
 ```
 
 ## Docker Support
