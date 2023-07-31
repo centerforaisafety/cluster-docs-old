@@ -309,7 +309,7 @@ pip install cmake
 
 ## How to update gcc, g++, or glibc
 
-Note these commands are meant to be run from the compute nodes.  It will give an error that they are missing if run from login node.  
+Note these commands are meant to be run from the compute nodes.  It will give an error that they are missing if they run from the login node.  
 
 If running interactively:
 
