@@ -309,16 +309,22 @@ pip install cmake
 
 ## How to update gcc, g++, or glibc
 
+Note these commands are meant to be run from the compute nodes.  It will give an error that they are missing if run from login node.  
+
 If running interactively:
 
 ```bash
-# The following enables gcc v10 but we also support v6, 8, 10, and 12.
+# The following enables gcc v10 but we also support v6, 8, 10, 11, and 12.
 # Simply replace the 10 with one of the other numbers.
 scl enable devtoolset-10 bash
 
 # The following enables LLVM.
 scl enable llvm-toolset-7.0 bash
 ```
+
+For jobs put on the queue:
+
+Add the following to your sbatch scripts `source /opt/rh/devtoolset-10/enable`. 
 
 ## Docker Support
 
