@@ -246,20 +246,24 @@ squeue                    # See where your job is in the queue.
 
 ## Jupyter Notebooks on the Cluster
 
+See Nathaniel Li's [instructions](https://natli.notion.site/IPYNBs-on-CAIS-Compute-Node-ed01ac83448542d6b510847c407766e0) as well.
+
 ```bash
 # I have configured my .ssh/config so I can do ssh cais_cluster
-# If you have not replace cais_cluster with user_name@150.230.36.182
+# If you have not replace cais_cluster with user_name@compute.safe.ai
 ssh cais_cluster
 
+# See earlier section about installing anaconda.
 # install jupyter notebooks if you haven't already
 conda install -c anaconda jupyter
-# or pip install notebook
+# or use pip to install jupyter notebook
 
 # Get on a compute node
 srun  --pty bash
 
 # you'll need to note which compute-permanent-node-## you are on for below.
 
+# Run the following on the compute node
 unset XDG_RUNTIME_DIR
 export NODEPORT=$(( $RANDOM + 1024 ))
 echo $NODEPORT
@@ -282,7 +286,7 @@ export NODEPORT=####
 ssh -t -t cais_cluster -L $NODEPORT:localhost:$NODEPORT ssh -N compute-permanent-node-### -L $NODEPORT:localhost:$NODEPORT
 ```
 
-Finally open up the browser and paste in the link
+Finally open up your favorite browser and paste in the link. `http://localhost:19303/?token=cb....`
 
 ## Switching shell such as to ZSH
 
