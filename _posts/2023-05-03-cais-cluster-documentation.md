@@ -12,9 +12,9 @@ title: Welcome to the Center for AI Safety Cluster
 - [Getting Started](#getting-started)
     - [Getting Cluster Access](#getting-cluster-access)
     - [Getting Help](#getting-help)
-    - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
     - [Basic Cluster Usage Example](#basic-cluster-usage-example)
         - [Example sbatch file](#example-sbatch-file)
+    - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
 - [Package Management](#package-management)
     - [Nix Package Manager](#nix-package-manager)
         - [How to find packages](#how-to-find-packages)
@@ -54,10 +54,6 @@ There is a [short form](https://www.safe.ai/compute-cluster) that one can apply 
 ## Getting Help
 
 Once granted access please login to slack and message us in #help-desk channel.  For questions before being granted access please direct them to [contact@safe.ai](mailto:contact@safe.ai). 
-
-## Sharing files and folders with other users
-
-For security measures, if you make your directory readable or executable by other users you will be locked out from `ssh`'ing into the cluster. This prevents other users from manipulating your ssh keys and such.  If you do wish to share we've made the directories `public_models`, `private_models` and `datasets`. Useable by everyone and you can share files and folders there.  If this does not work out please message us on slack for assistance.
 
 ## Basic Cluster Usage Example
 
@@ -117,6 +113,10 @@ python --version  # prints out the python version.  Replace this with a python c
 
 sleep 5
 ```
+
+## Sharing files and folders with other users
+
+For security measures, if you make your directory readable or executable by other users you will be locked out from `ssh`'ing into the cluster. This prevents other users from manipulating your ssh keys and such.  If you do wish to share we've made the directories `public_models`, `private_models` and `datasets`. Useable by everyone and you can share files and folders there.  If this does not work out please message us on slack for assistance.
 
 # Package Management
 ## Nix Package Manager
