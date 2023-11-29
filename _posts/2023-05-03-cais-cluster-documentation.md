@@ -286,7 +286,7 @@ Start a new terminal window
 # Paste the nodeport from above here replacing the #s
 export NODEPORT=####
 
-ssh -t -t cais_cluster -L $NODEPORT:localhost:$NODEPORT ssh -N compute-permanent-node-### -L $NODEPORT:localhost:$NODEPORT
+ssh -t -t cais_cluster -L ${NODEPORT}:localhost:${NODEPORT} ssh -N compute-permanent-node-### -L ${NODEPORT}:localhost:${NODEPORT}
 ```
 
 Finally open up your favorite browser and paste in the link. `http://localhost:19303/?token=cb....`
