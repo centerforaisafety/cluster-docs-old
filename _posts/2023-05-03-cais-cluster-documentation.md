@@ -15,6 +15,7 @@ title: Welcome to the Center for AI Safety Cluster
     - [Basic Cluster Usage Example](#basic-cluster-usage-example)
         - [Example sbatch file](#example-sbatch-file)
     - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
+    - [How to request additional filesystem storage](#how-to-request-additional-filesystem-storage)
 - [Package Management](#package-management)
     - [Nix Package Manager](#nix-package-manager)
         - [How to find packages](#how-to-find-packages)
@@ -117,6 +118,10 @@ sleep 5
 ## Sharing files and folders with other users
 
 For security measures, if you make your directory readable or executable by other users you will be locked out from `ssh`'ing into the cluster. This prevents other users from manipulating your ssh keys and such.  If you do wish to share we've made the directories `public_models`, `private_models` and `datasets`. Useable by everyone and you can share files and folders there.  If this does not work out please message us on slack for assistance.
+ 
+## How to request additional filesystem storage
+
+By default, all users of the cluster are limited to 1 TB of file system storage on the cluster. If you need more storage for your project, you can submit an [application](https://airtable.com/appeMGyDPWhtwa3Dw/shrJ5x6XnzqGDx3RV) indicating how much additional storage you need and for how long. We are usually able to provide a decision within 2-3 days.
 
 # Package Management
 ## Nix Package Manager
