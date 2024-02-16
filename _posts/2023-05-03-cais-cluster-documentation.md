@@ -10,35 +10,35 @@ title: Welcome to the Center for AI Safety Cluster
 
 # Table of Contents  <!-- omit from toc -->
 - [Getting Started](#getting-started)
-    - [Getting Cluster Access](#getting-cluster-access)
-    - [Getting Help](#getting-help)
-    - [Basic Cluster Usage Example](#basic-cluster-usage-example)
-        - [Example sbatch file](#example-sbatch-file)
-    - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
-    - [How to request additional filesystem storage](#how-to-request-additional-filesystem-storage)
+  - [Getting Cluster Access](#getting-cluster-access)
+  - [Getting Help](#getting-help)
+  - [Basic Cluster Usage Example](#basic-cluster-usage-example)
+    - [Example sbatch file](#example-sbatch-file)
+  - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
+  - [How to request additional filesystem storage](#how-to-request-additional-filesystem-storage)
 - [Package Management](#package-management)
-    - [Nix Package Manager](#nix-package-manager)
-        - [How to find packages](#how-to-find-packages)
-        - [How to install packages](#how-to-install-packages)
-        - [How to list installed packages](#how-to-list-installed-packages)
-        - [How to remove packages](#how-to-remove-packages)
-        - [How to upgrade packages](#how-to-upgrade-packages)
-        - [Additional Resources](#additional-resources)
-    - [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
-    - [Suggested Installations](#suggested-installations)
+  - [Nix Package Manager](#nix-package-manager)
+    - [How to find packages](#how-to-find-packages)
+    - [How to install packages](#how-to-install-packages)
+    - [How to list installed packages](#how-to-list-installed-packages)
+    - [How to remove packages](#how-to-remove-packages)
+    - [How to upgrade packages](#how-to-upgrade-packages)
+    - [Additional Resources](#additional-resources)
+  - [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
+  - [Suggested Installations](#suggested-installations)
 - [SLURM Notes](#slurm-notes)
-    - [SLURM Example Commands](#slurm-example-commands)
+  - [SLURM Example Commands](#slurm-example-commands)
 - [Specific Topics](#specific-topics)
-    - [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
-    - [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
-    - [Installing cmake](#installing-cmake)
-    - [How to update gcc, g++, or glibc](#how-to-update-gcc-g-or-glibc)
-    - [Docker Support](#docker-support)
-    - [Configuring Notifications](#configuring-notifications)
-    - [VS Code on the Cluster](#vs-code-on-the-cluster)
-    - [Distributed Training Example](#distributed-training-example)
-        - [Basic Example](#basic-example)
-        - [Enabling debugging for distributed training](#enabling-debugging-for-distributed-training)
+  - [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
+  - [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
+  - [Installing cmake](#installing-cmake)
+  - [How to update gcc, g++, or glibc](#how-to-update-gcc-g-or-glibc)
+  - [Docker Support](#docker-support)
+  - [Configuring Notifications](#configuring-notifications)
+  - [VS Code on the Cluster](#vs-code-on-the-cluster)
+  - [Distributed Training Example](#distributed-training-example)
+    - [Basic Example](#basic-example)
+    - [Enabling debugging for distributed training](#enabling-debugging-for-distributed-training)
 
 # Getting Started
 
@@ -67,7 +67,7 @@ ssh  -i {path-to-private-key} {username}@compute.safe.ai
 ssh cais
 ```
 
-Important note: Please do not do any work on the login node. This includes installing things (request a cpu node to do so).
+**Important note:** Please do not do any work on the login node. This includes installing things (request a cpu node to do so). Nix is the only exception to this rule.
 
 Test out requesting a node.
 
@@ -127,6 +127,8 @@ By default, all users of the cluster are limited to 1 TB of file system storage 
 ## Nix Package Manager
 
 Nix is a package manager for Linux and other Unix systems, with a wide selection of up-to-date packages. This document is a brief introduction to Nix and how to use it. 
+
+**Note:** Nix commands are only available on the login node and not on any compute nodes. It is safe to install packages on the login node through Nix as the commands are forwarded to the Nix daemon which runs on a different node.
 
 ### How to find packages
 
