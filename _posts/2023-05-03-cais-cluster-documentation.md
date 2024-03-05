@@ -126,84 +126,85 @@ By default, all users of the cluster are limited to 1 TB of file system storage 
 # Package Management
 ## Nix Package Manager
 
-Nix is a package manager for Linux and other Unix systems, with a wide selection of up-to-date packages. This document is a brief introduction to Nix and how to use it. 
+Nix is a package manager for that is supported on any modern operating system, with a wide selection of up-to-date packages. This document is a brief introduction to Nix and how to use it. 
 
-**Note:** Nix commands are only available on the login node and not on any compute nodes. It is safe to install packages on the login node through Nix as the commands are forwarded to the Nix daemon which runs on a different node.
+**Note:** Nix support on the cluster is an experimental feature. It could be deprecated in the future. Nix commands are only available on the login node and not on any compute nodes. It is safe to install packages on the login node through Nix.
 
 ### How to find packages
 
-Use `nix-search`, an alias for `nix search nixpkgs#`, to search for packages.
+Use `nix-search`, an alias for `nix-env -qaP $1`, to search for packages.
 
 Examples
 ```bash
-# Search for packages with bash function:
+# Search for packages with bash function
 nix-search hello
+> nixpkgs.hello  hello-2.12.1
 ```
 
 ### How to install packages
 
-Use `nix-install`, a convienient alias for `nix profile install nixpkgs#`, to install packages.
+Use `nix-install`, a convienient alias for `nix-env -iA nixpkgs.$1`, to install packages.
 
 Examples
 ```bash
-# Install a package(s) with bash function:
+# Install a package(s) with bash function
 nix-install hello
-nix-install hello llvm
-
-# Install a package from a specific branch:
-nix profile install nixpkgs/release-20.09#hello
+nix-install hello neofetch
 ```
 
 ### How to list installed packages
 
-Use `nix-list`, an alias for `nix profile list`, to list installed pacakges.
+Use `nix-list`, an alias for `nix-env -q`, to list installed packges.
 
 Examples
 ```bash
 # List installed packages with bash function:
 nix-list
+> hello-2.12.1
+> neofetch-unstable-2021-12-10
 ```
 
 ### How to remove packages
 
-Use `nix-list` with `grep` to find a package's id. Use `nix-remove`, an alias for `nix profile remove`, to remove packages.
+Use `nix-list` to find a package's full name. Use `nix-remove`, an alias for `nix-env -e $1`, to remove packages.
 
 Examples
 ```bash
-# Remove a specific package by id:
-nix-list | grep hello
-> 1 flake:nixpkgs# ... 2rf7qm44j-hello-2.12.1
-# The number at the beginning of the output line above is the package id.
+# List your packages
+nix-list
+> hello-2.12.1
+> neofetch-unstable-2021-12-10
 
-# Use the package id to remove the package
-nix-remove 1
-> removing 'flake:nixpkgs#legacyPackages.aarch64-darwin.hello'
+# Use the full package name to remove it
+nix-remove hello-2.12.1
+> nix-env -e hello-2.12.1
+> uninstalling 'hello-2.12.1'
+> building '/nix/store/j32crjki8lm5cki464036w9ii0qmpn7r-user-environment.drv'...
 ```
 
 ### How to upgrade packages
 
-Use `nix-list` with `grep` to find a package's id. Use `nix-upgrade`, an alias for `nix profile upgrade`, to upgrade packages.
+Use `nix-list` with find a package's full name. Use `nix-upgrade`, an alias for `nix-env -u $1`, to upgrade packages.
 
 Examples
 ```bash
-# Upgrade all packages that are installed:
-nix-upgrade '.*'
+# Upgrade all packages that are installed
+nix-upgrade 
 
-# Upgrade a specific package by id:
-nix-list | grep hello
-> 1 flake:nixpkgs# ... 2rf7qm44j-hello-2.12.1
-# The number at the beginning of the output line above is the package id.
+# List your packages
+nix-list 
+> hello-2.12.1
+> neofetch-unstable-2021-12-10
 
-# Use the package id to upgrade the package
-nix-upgrade 1
+# Use the full package name to upgrade it
+nix-upgrade hello-2.12.1
 ```
 
 ### Additional Resources
 
-This tool is powerful and has a lot of functionality that we haven't covered. For more information, about Nix and its value proposition as well as the Nix command, check out the links below.    
+This tool is powerful and has a lot of functionality that we haven't covered. For more information, about Nix and its value proposition check out the link below.    
 
-[Why Nix?](https://nixos.org/explore.html)  
-[Nix command documentation](https://nixos.org/manual/nix/stable/command-ref/experimental-commands.html)
+[Why Nix?](https://nixos.org/explore.html)
 
 
 ## Install Miniconda or Anaconda
