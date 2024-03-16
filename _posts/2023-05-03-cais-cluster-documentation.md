@@ -40,25 +40,21 @@ title: Welcome to the Center for AI Safety Cluster
     - [Basic Example](#basic-example)
     - [Enabling debugging for distributed training](#enabling-debugging-for-distributed-training)
 
-# Getting Started
+# Cluster Overview
 
-The Center for AI Safety (CAIS) is launching an initiative to provide free compute support for research projects in ML safety. This is the CAIS Compute Cluster.
-
-- CAIS Compute Cluster is set up for ML safety applications
-- 256x A100 GPUs with 80GB memory
-- 1,600 Gbit/s inter-node network speeds
+The cluster is based on 32 bare metal BM.GPU.A100-v2.8 nodes and a number of service nodes. Each GPU node is configured with 8 NVIDIA A100 GPU cards with 8X80 GB memory and 27.2 TB local NVMe SSD Storage. These nodes are connected by a remote direct memory access (RDMA) network for data communication, providing 1,600 Gbit/sec inter-node network bandwidth with latency as low as single-digit microseconds.
 
 ## Getting Cluster Access
 
-There is a [short form](https://www.safe.ai/compute-cluster) that one can apply for to gain access to the CAIS Compute Cluster.
+There is a [form](https://www.safe.ai/compute-cluster) linked on the compute cluster's page on CAIS' website to apply for access.
 
 ## Getting Help
 
-Once granted access please login to slack and message us in #help-desk channel.  For questions before being granted access please direct them to [contact@safe.ai](mailto:contact@safe.ai). 
+To request help, please login to the cluster's Slack workspace and message us in #help-desk channel.  For questions before being granted access please direct them to [compute@safe.ai](mailto:compute@safe.ai). 
 
 ## Basic Cluster Usage Example
 
-Once you've given us your ssh key and we've set you up. SSH onto the login node.
+Once you've given us your ssh key and we've provided your login credentials, you can SSH onto the login node.
 
 ```bash
 ssh  -i {path-to-private-key} {username}@compute.safe.ai
@@ -67,7 +63,7 @@ ssh  -i {path-to-private-key} {username}@compute.safe.ai
 ssh cais
 ```
 
-**Important note:** Please do not do any work on the login node. This includes installing things (request a cpu node to do so). Nix is the only exception to this rule.
+**Important note:** Please do not do any work on the login node. This includes installing things (request a CPU node to do so). Nix is the only exception to this rule.
 
 Test out requesting a node.
 
@@ -117,7 +113,17 @@ sleep 5
 
 ## Sharing files and folders with other users
 
-For security measures, if you make your directory readable or executable by other users you will be locked out from `ssh`'ing into the cluster. This prevents other users from manipulating your ssh keys and such.  If you do wish to share we've made the directories `public_models`, `private_models` and `datasets`. Useable by everyone and you can share files and folders there.  If this does not work out please message us on slack for assistance.
+For security measures, if you make your directory readable or executable by other users you will be locked out from `ssh`'ing into the cluster. This prevents other users from manipulating your ssh keys and such.  If you do wish to share we've made the directories `/public_models`, `/private_models` and `/datasets`. Useable by everyone and you can share files and folders there.
+
+## How to request a shared folder
+
+We can set up a folder in the /private_models directory for you to share files with your team. To make it easier to keep track of who is using shared folders in /private_models and be able to remove files that are no longer in use once projects are finished, we are asking everyone that needs to create a new folder to share files with their team to first fill out this brief form: https://airtable.com/appeMGyDPWhtwa3Dw/shr0sUqxVLwokliXW . We will then set up the folder and grant access to the relevant team members. 
+
+This process does not apply to the /public_models folder, which should only be used for models that other teams are likely to want for their research projects.
+
+## Public models and datasets
+
+Many commonly used models (Llama, Mistral, Pythia etc.) can be found in the /public_models folder, so please check this before downloading them again. Similarly, some popular datasets can be found in the /datasets folder.
  
 ## How to request additional filesystem storage
 
@@ -343,11 +349,11 @@ Add the following to your sbatch scripts `source /opt/rh/devtoolset-10/enable`.
 
 ## Docker Support
 
-We are actively working on this.  Please poke us in the slack if you want this support sooner and we can either reprioritize it or give you our status update on it.
+This is on our roadmap for the coming months.  Please poke us in the Slack if you want this support sooner and we can either reprioritize it or give you our status update on it.
 
 ## Configuring Notifications
 
-We have configured Slurm for sending email and slack notifications for various job stages (begin, fail, requeue, complete, etc) from the `do-not-reply@safe.ai` email address (check spam). It is also capable of interfacing with other notification platforms, so if you would like us to configure it for another platform, let us know and we will look into it. We are using the [goslmailer](https://github.com/CLIP-HPC/goslmailer) for the notifications.
+We have configured SLURM for sending email and Slack notifications for various job stages (begin, fail, requeue, complete, etc) from the `do-not-reply@safe.ai` email address (check spam). It is also capable of interfacing with other notification platforms, so if you would like us to configure it for another platform, let us know and we will look into it. We are using the [goslmailer](https://github.com/CLIP-HPC/goslmailer) for the notifications.
 
 You can add notifications to your job by adding the following lines to your SBATCH file:
 
@@ -356,7 +362,7 @@ You can add notifications to your job by adding the following lines to your SBAT
 #SBATCH --mail-type=ALL
 ```
 
-Feel free to replace `{email}` with one of your choice and `{slack-member-id}` with your personal one for the CAIS Compute Cluster workspace ([how to find your member id](https://www.workast.com/help/article/how-to-find-a-slack-user-id/)). If you would only like to use slack or email for notifications and not the other, you can do this by only including that service in your sbatch.
+Feel free to replace `{email}` with one of your choice and `{slack-member-id}` with your personal one for the CAIS Compute Cluster workspace ([how to find your member id](https://www.workast.com/help/article/how-to-find-a-slack-user-id/)). If you would only like to use Slack or email for notifications and not the other, you can do this by only including that service in your sbatch.
 
 Example:
 
@@ -365,7 +371,7 @@ Example:
 #SBATCH --mail-type=ALL
 ```
 
-You can also configure the messages with all the [mail-type options](https://slurm.schedmd.com/sbatch.html#OPT_mail-type) found in Slurm by default.  
+You can also configure the messages with all the [mail-type options](https://slurm.schedmd.com/sbatch.html#OPT_mail-type) found in SLURM by default.  
 
 ## VS Code on the Cluster
 
