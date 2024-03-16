@@ -9,12 +9,15 @@ title: Welcome to the Center for AI Safety Cluster
 {: toc } -->
 
 # Table of Contents  <!-- omit from toc -->
-- [Getting Started](#getting-started)
+- [Cluster overview](#cluster-overview)
+- [Getting started](#getting-started)
   - [Getting Cluster Access](#getting-cluster-access)
   - [Getting Help](#getting-help)
   - [Basic Cluster Usage Example](#basic-cluster-usage-example)
     - [Example sbatch file](#example-sbatch-file)
   - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
+  - [How to request a shared folder](#how-to-request-a-shared-folder)
+  - [Public models and datasets](#public-models-and-datasets)
   - [How to request additional filesystem storage](#how-to-request-additional-filesystem-storage)
 - [Package Management](#package-management)
   - [Nix Package Manager](#nix-package-manager)
@@ -43,6 +46,8 @@ title: Welcome to the Center for AI Safety Cluster
 # Cluster Overview
 
 The cluster is based on 32 bare metal BM.GPU.A100-v2.8 nodes and a number of service nodes. Each GPU node is configured with 8 NVIDIA A100 GPU cards with 8X80 GB memory and 27.2 TB local NVMe SSD Storage. These nodes are connected by a remote direct memory access (RDMA) network for data communication, providing 1,600 Gbit/sec inter-node network bandwidth with latency as low as single-digit microseconds.
+
+# Getting Started
 
 ## Getting Cluster Access
 
