@@ -11,27 +11,35 @@ title: CAIS Compute Cluster Policies
 [Feedback Form](https://airtable.com/shrqbKfS2KywKjhQS)
 
 ### Compute Access
-Grantees are only permitted to use the CAIS compute cluster to work on pre-approved projects. Each grantee is able to add research collaborators for these projects, who are then also able to access the compute cluster. The primary investigator (PI) is initially allowed to add up to 4 collaborators, with any further additions subject to approval by CAIS staff. It's important to note that PIs share the same slurm priority as their collaborators.
+Grantees are only permitted to use the CAIS Compute Cluster to work on pre-approved projects. Each grantee is able to add research collaborators for these projects, who are then also able to access the compute cluster. The primary investigator (PI) is initially allowed to add up to 4 collaborators, with any further additions subject to approval by CAIS staff. PIs share the same priority as their collaborators for scheduling jobs in SLURM.
 
-#### Time-Limited Access
-Grantees given time-limited access to the cluster will have a limited number of GPU-hours for their experiments. After finishing, the grantee will be expected to fill out a brief report.
+### Project-Based Access
+Grantees with project-based access to the cluster are not limited in the number of GPUs or GPU-hours they can use. 
 
-#### Project-Based Access
-Grantees with project-based access to the cluster are not limited in the number of GPU-hours they can use. They will have unlimited cluster access until their project finishes or at most for a year, during which CAIS staff will conduct email check-ins with the PI every three months.
+We ask applicants submitting new projects or requesting extensions to indicate how long they expect to need for their project. By default, we encourage users to request access until one of the three annual review points for research updates and extensions. These review points occur roughly in early February, June and October, timed to take place after major conference submission deadlines (i.e. after ICML, NeurIPS, ICLR deadlines). Applicants can request access up to two review points away (up to the next review point or the one after that), meaning that they would have access for either one or two 4-month periods. They may later request an extension if further time is needed.
 
-In the case that a project undergoes significant pivoting, you must let us know. We will review the project again. If no restrictions on pivoting are in place, project-based access would be equivalent to that of general access, which is not our intention.
+Applicants may also specify a shorter time period if only short-term access is needed.
 
-At the end of the year, PIs must complete a more comprehensive report to renew their access to the cluster. Renewals will be assessed based on the safety-relevance of previous work and the research output.
+At each review point (after ICML, NeurIPS, ICLR deadlines), PIs will be requested to provide an update on their research, which must be completed to maintain their access to the cluster. 
+
+When the initial period requested by a user expires, we will invite them to apply to extend their existing project or submit a proposal for a new project. This will take into account the strength of the project proposal and the team's prior research output while using the cluster.
+
+### Limited Access
+Grantees with limited access to the cluster are allowed to use the "single" and "interactive" nodes. This is typically granted to users that are taking part in training programs or other early-career researchers. Other access conditions are similar to grantees with project-based access.
 
 ### Job Allocation
-The CAIS compute cluster uses slurm to allocate jobs. Jobs are subject to a hard limit of 48 hours, and if a longer run is necessary, please message CAIS staff to schedule this. Approval is granted on a case-by-case basis. Additionally, slurm's scheduling algorithm deprioritizes runs which require many GPUs. If a job is not reaching the top of the priority queue, feel free to reach out to CAIS staff. As before, approval will also be granted on a case-by-case basis. Once approved, the job will be scheduled for several days down the line.
+The CAIS compute cluster uses SLURM to allocate jobs. Jobs are subject to a hard limit of 48 hours, and if a longer run is necessary, please message CAIS staff to schedule this. Approval is granted on a case-by-case basis. SLURM's scheduling algorithm deprioritizes runs which require many GPUs. If a job is not reaching the top of the priority queue, feel free to reach out to CAIS staff. As before, increased priority to run jobs may be granted on a case-by-case basis. 
 
-During periods leading up to conference deadlines, the compute cluster is expected to experience high demand. It may be difficult or impossible to reserve GPUs in advance during these periods. As such, compute priority may solely be determined by slurm during these weeks.
+During periods leading up to conference deadlines, the compute cluster is expected to experience high demand. It may be difficult or impossible to reserve GPUs in advance during these periods. As such, compute priority may solely be determined by SLURM during these weeks.
 
 ### Project Scope
-Grantees can only use the CAIS compute cluster for pre-approved research projects that focus on ML safety. A larger document outlining the research directions that fall within the scope of this program versus those that do not will be released soon.
+Grantees can only use the CAIS compute cluster for pre-approved research projects that focus on ML safety. Any individual who is found to be using the compute cluster for a project that falls outside of the pre-approved research directions will face temporary or permanent suspension of their access to the cluster.
 
-If a grantee wishes to work on a new research project, they must submit the project for approval by CAIS staff through [this form](https://airtable.com/shrN5XbLE9oBIWVP8). CAIS staff will then follow-up with any additional questions or instructions. Any individual who is found to be using the compute cluster for a project that falls outside of the pre-approved research directions will face temporary or permanent suspension of their access to the cluster.
+For a non-exhaustive list of topics we are excited about, see Unsolved Problems in ML Safety or the Intro to ML Safety Course. We may also consider other research areas provided appropriate justification of the impact on ML safety is provided. We are particularly excited to support work on LLM adversarial robustness and transparency. 
+
+Work which improves general capabilities or work that improves safety as a consequence of improving general capabilities are not in scope. “General capabilities” of AI refers to concepts such as a model’s accuracy on typical tasks, sequential decision making abilities in typical environments, reasoning abilities on typical problems, and so on.
+
+If a grantee wishes to work on a new research project, they must submit the project for approval by CAIS staff through the application form linked on CAIS' website (https://www.safe.ai/work/compute-cluster). 
 
 ### Credit
 If you use the CAIS compute cluster for your project, we kindly ask that you include the following statement in your paper's acknowledgements section.
@@ -41,4 +49,4 @@ If you use the CAIS compute cluster for your project, we kindly ask that you inc
 Please note that by using the compute cluster, you agree to have your group or your paper featured on our website (where it clearly indicates that we merely supported the research and are not responsible for your work).
 
 ### Bugs and Feedback
-Bugs should be reported in the #help-desk channel on the slack. General feedback about the cluster can be reported in [this form](https://airtable.com/shrqbKfS2KywKjhQS). For anything urgent, time sensitive, or possibly private please contact Steven Basart and Andriy Novykov directly on slack. (This way it notifies both of them.)
+Bugs should be reported in the #help-desk channel in the cluster's Slack workspace. General feedback about the cluster can be reported in [this form](https://airtable.com/shrqbKfS2KywKjhQS). For anything urgent, time sensitive, or possibly private please contact Andriy Novykov directly on Slack.
