@@ -343,9 +343,6 @@ If running interactively:
 # The following enables gcc v10 but we also support v6, 8, 10, 11, and 12.
 # Simply replace the 10 with one of the other numbers.
 scl enable devtoolset-10 bash
-
-# The following enables LLVM.
-scl enable llvm-toolset-7.0 bash
 ```
 
 For jobs put on the queue:
