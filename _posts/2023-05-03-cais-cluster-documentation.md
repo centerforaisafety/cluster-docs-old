@@ -128,7 +128,7 @@ This process does not apply to the /public_models folder, which should only be u
 
 ## Public models and datasets
 
-Many commonly used models (Llama, Mistral, Pythia etc.) can be found in the /public_models folder, so please check this before downloading them again. Similarly, some popular datasets can be found in the /datasets folder.
+Many commonly used models (Llama, Mistral, Pythia etc.) can be found in the `/data/public_models` folder, so please check this before downloading them again. Similarly, some popular datasets can be found in the `/data/datasets` folder.
  
 ## How to request additional filesystem storage
 
