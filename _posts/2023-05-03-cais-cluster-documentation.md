@@ -128,8 +128,18 @@ This process does not apply to the /public_models folder, which should only be u
 
 ## Public models and datasets
 
-Many commonly used models (Llama, Mistral, Pythia etc.) can be found in the `/data/public_models` folder, so please check this before downloading them again. Similarly, some popular datasets can be found in the `/data/datasets` folder.
+Many commonly used models (Llama, Mistral/Mixtral, Pythia etc.) can be found in the `/data/public_models `folder. Similarly, some popular datasets can be found in the `/data/datasets` folder. Please use these folders to save space on the cluster. 
+
+Models available on Huggingface can be accessed as follows: 
+
+```
+/data/public_models/huggingface/{hf_repo}
+```
  
+[These HuggingFace models](https://docs.google.com/spreadsheets/d/1lF4rx-edniZAon5ExcS8-qa-nLdOxb7tTLHXQ0dLubw/edit#gid=0) are currently available on the CAIS cluster. 
+
+If you’d like to add models to `/data/public_models`, please see this [folder](./add_public_hf_model) with the code (Python file & bash script) to do so. Afterward, please add your model to the spreadsheet linked above so others can use it.
+
 ## How to request additional filesystem storage
 
 By default, all users of the cluster are limited to 1 TB of file system storage on the cluster. If you need more storage for your project, you can submit an [application](https://airtable.com/appeMGyDPWhtwa3Dw/shrJ5x6XnzqGDx3RV) indicating how much additional storage you need and for how long. We are usually able to provide a decision within 2-3 days.
