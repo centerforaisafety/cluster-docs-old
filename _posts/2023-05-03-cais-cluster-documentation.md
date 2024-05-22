@@ -234,8 +234,7 @@ chmod +x Miniconda3-latest-Linux-x86_64.sh
 Example of how to install [pytorch](https://pytorch.org/get-started/locally/) a popular deep learning library.  Similar commands exist for tensorflow etc.
 
 ```
-conda update conda
-conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+pip3 install torch torchvision torchaudio
 ```
 
 ## Suggested Installations
