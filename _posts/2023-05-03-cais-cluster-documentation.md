@@ -47,6 +47,13 @@ title: Welcome to the Center for AI Safety Cluster
 
 The cluster is based on 32 bare metal BM.GPU.A100-v2.8 nodes and a number of service nodes. Each GPU node is configured with 8 NVIDIA A100 GPU cards with 8X80 GB memory and 27.2 TB local NVMe SSD Storage. These nodes are connected by a remote direct memory access (RDMA) network for data communication, providing 1,600 Gbit/sec inter-node network bandwidth with latency as low as single-digit microseconds.
 
+SSH fingerprints:
+```
+2048 SHA256:AQtXOzqLY1Bzxrzcg/7emNCZPM+oR2UBWB3QvviQq9M watch-tower-login (RSA)
+256 SHA256:QtxZcVFXr0EsnJBfmx/5yhoCmAYSmP43x1nJHS9K78c watch-tower-login (ECDSA)
+256 SHA256:DiFgOsIH1WEUEDn6lg0ImIg7ok5RE+i4R26uxUhXjQA watch-tower-login (ED25519)
+```
+
 # Getting Started
 
 ## Getting Cluster Access
