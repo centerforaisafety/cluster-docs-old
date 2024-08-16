@@ -9,8 +9,8 @@ title: Welcome to the Center for AI Safety Cluster
 {: toc } -->
 
 # Table of Contents  <!-- omit from toc -->
-- [Cluster overview](#cluster-overview)
-- [Getting started](#getting-started)
+- [Cluster Overview](#cluster-overview)
+- [Getting Started](#getting-started)
   - [Getting Cluster Access](#getting-cluster-access)
   - [Getting Help](#getting-help)
   - [Basic Cluster Usage Example](#basic-cluster-usage-example)
@@ -18,6 +18,7 @@ title: Welcome to the Center for AI Safety Cluster
   - [Sharing files and folders with other users](#sharing-files-and-folders-with-other-users)
   - [How to request a shared folder](#how-to-request-a-shared-folder)
   - [Public models and datasets](#public-models-and-datasets)
+  - [How to Use the Global Hugging Face Model Cache](#how-to-use-the-global-hugging-face-model-cache)
   - [How to request additional filesystem storage](#how-to-request-additional-filesystem-storage)
 - [Package Management](#package-management)
   - [Nix Package Manager](#nix-package-manager)
@@ -136,7 +137,46 @@ This process does not apply to the /public_models folder, which should only be u
 ## Public models and datasets
 
 Many commonly used models (Llama, Mistral, Pythia etc.) can be found in the `/data/public_models` folder, so please check this before downloading them again. Similarly, some popular datasets can be found in the `/data/datasets` folder.
- 
+
+
+## How to Use the Global Hugging Face Model Cache
+
+The CAIS cluster provides a global Hugging Face model cache to facilitate efficient access to popular resources without affecting your file system quota. This cache is maintained by the CAIS cluster administrators and is regularly updated with frequently used models. Below is a guide on how to utilize this resource.
+
+_**Accessing the Global Cache**_  
+The global Hugging Face cache is located at `/data/huggingface/`. You can use the cache by either setting the `cache_dir` argument or by setting the `HF_HOME` environment variable. For example:
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+cache_dir = "/data/huggingface/"
+model_name = "meta-llama/Meta-Llama-3-8B-Instruct"
+
+print("Loading model...")
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
+```
+
+_**Requesting Models to be Added to the Cache**_  
+If you require a model that is not already cached, you can request it by posting in the #shared-models Slack channel. Please include the full name, such as `meta-llama/Meta-Llama-3.1-8B`. Requests are typically processed within 24 hours, subject to approval.
+
+You can view the list of models currently available in the global cache on our [Shared Models Tracker](https://docs.google.com/spreadsheets/d/1q8q1vWuEqaZixtX_XTy0HNIAv8b9zBim_zVRDCLcmfI/edit?gid=0#gid=0).
+
+_**Cache Maintenance and Updates**_  
+The global cache is updated regularly, with popular models added automatically. Models that have not been used for over 60 days will be removed.
+
+_**Troubleshooting**_  
+Here are some common issues and how to resolve them:  
+  - Model Not Found: Double-check the model name for typos. Refer to the Shared Models Tracker for the correct path.  
+  - Missing Dependencies: Ensure all required Python packages are installed.
+  - Missing Token: Ensure you have an authentication token for models that require them. Consult the Hugging Face documentation for further information.
+
+For additional help, reach out via the #shared-models-data Slack channel.
+
+_**Using Custom Models**_  
+If you need to cache a custom model locally, feel free to make use of a local HF cache. However, be mindful of storage quotas and only use local caching when necessary.
+
 ## How to request additional filesystem storage
 
 By default, all users of the cluster are limited to 500 GB of file system storage on the cluster. If you need more storage for your project, you can submit an [application](https://airtable.com/appeMGyDPWhtwa3Dw/shrJ5x6XnzqGDx3RV) indicating how much additional storage you need and for how long. We are usually able to provide a decision within 2-3 days.
