@@ -35,7 +35,6 @@ title: Welcome to the Center for AI Safety Cluster
   - [Jupyter Notebooks on the Cluster](#jupyter-notebooks-on-the-cluster)
   - [Switching shell such as to ZSH](#switching-shell-such-as-to-zsh)
   - [Installing cmake](#installing-cmake)
-  - [How to update gcc, g++, or glibc](#how-to-update-gcc-g-or-glibc)
   - [Docker Support](#docker-support)
   - [Configuring Notifications](#configuring-notifications)
   - [VS Code on the Cluster](#vs-code-on-the-cluster)
@@ -350,22 +349,6 @@ If you're favorite shell is not installed on the system just ask us to add it.
 ```bash
 pip install cmake
 ```
-
-## How to update gcc, g++, or glibc
-
-Note these commands are meant to be run from the compute nodes.  It will give an error that they are missing if they run from the login node.  
-
-If running interactively:
-
-```bash
-# The following enables gcc v10 but we also support v6, 8, 10, 11, and 12.
-# Simply replace the 10 with one of the other numbers.
-scl enable devtoolset-10 bash
-```
-
-For jobs put on the queue:
-
-Add the following to your sbatch scripts `source /opt/rh/devtoolset-10/enable`. 
 
 ## Docker Support
 
