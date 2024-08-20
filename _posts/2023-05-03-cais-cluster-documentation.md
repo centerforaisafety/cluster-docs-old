@@ -44,7 +44,11 @@ title: Welcome to the Center for AI Safety Cluster
 
 # Cluster Overview
 
-The cluster is based on 32 bare metal BM.GPU.A100-v2.8 nodes and a number of service nodes. Each GPU node is configured with 8 NVIDIA A100 GPU cards with 8X80 GB memory and 27.2 TB local NVMe SSD Storage. These nodes are connected by a remote direct memory access (RDMA) network for data communication, providing 1,600 Gbit/sec inter-node network bandwidth with latency as low as single-digit microseconds.
+The cluster is hosted on OCI and is based on 32 bare metal BM.GPU.A100-v2.8 nodes and a number of service nodes. Each GPU node is configured with 8 NVIDIA A100 GPU cards with 8X80 GB memory, 27.2 TB local NVMe SSD Storage and Two 64 core AMD EPYC Milan, for a total of 256 GPUs, 4,096 CPU cores and 870 TB of file system storage.
+
+The nodes are connected by a remote direct memory access (RDMA) network for data communication. Each node has eight 2 x 100 Gbps network interface cards (NICs), providing a total of 1,600 Gbit/sec inter-node network bandwidth with latency as low as single-digit microseconds.
+
+The cluster is run on Ubuntu 22.04 and is managed using Ansible and Terraform. Nix is used for package management and we are in the process of implementing containerization using Singularity. The scheduling system for running jobs on the cluster is SLURM. Storage is managed using the WekaFS PetaByte Scale Distributed Parallel Filesystem.
 
 SSH fingerprints:
 ```
