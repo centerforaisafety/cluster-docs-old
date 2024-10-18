@@ -21,13 +21,6 @@ title: Welcome to the Center for AI Safety Cluster
   - [How to Use the Global Hugging Face Model Cache](#how-to-use-the-global-hugging-face-model-cache)
   - [How to request additional filesystem storage](#how-to-request-additional-filesystem-storage)
 - [Package Management](#package-management)
-  - [Nix Package Manager](#nix-package-manager)
-    - [How to find packages](#how-to-find-packages)
-    - [How to install packages](#how-to-install-packages)
-    - [How to list installed packages](#how-to-list-installed-packages)
-    - [How to remove packages](#how-to-remove-packages)
-    - [How to upgrade packages](#how-to-upgrade-packages)
-    - [Additional Resources](#additional-resources)
   - [Install Miniconda or Anaconda](#install-miniconda-or-anaconda)
   - [Suggested Installations](#suggested-installations)
 - [SLURM Notes](#slurm-notes)
@@ -49,7 +42,7 @@ The cluster is hosted on OCI and is based on 32 bare metal BM.GPU.A100-v2.8 node
 
 The nodes are connected by a remote direct memory access (RDMA) network for data communication. Each node has eight 2 x 100 Gbps network interface cards (NICs), providing a total of 1,600 Gbit/sec inter-node network bandwidth with latency as low as single-digit microseconds.
 
-The cluster is run on Ubuntu 22.04 and is managed using Ansible and Terraform. Nix is used for package management and we are in the process of implementing containerization using Singularity. The scheduling system for running jobs on the cluster is SLURM. Storage is managed using the WekaFS Distributed Parallel Filesystem.
+The cluster is run on Ubuntu 22.04 and is managed using Ansible and Terraform. We are in the process of implementing containerization using Singularity. The scheduling system for running jobs on the cluster is SLURM. Storage is managed using the WekaFS Distributed Parallel Filesystem.
 
 SSH fingerprints:
 ```
@@ -79,7 +72,7 @@ ssh  -i {path-to-private-key} {username}@compute.safe.ai
 ssh cais
 ```
 
-**Important note:** Please do not do any work on the login node. This includes installing things (request a CPU node to do so). Nix is the only exception to this rule.
+**Important note:** Please do not do any work on the login node. This includes installing things (request a CPU node to do so). 
 
 Test out requesting a node.
 
@@ -185,89 +178,6 @@ If you need to cache a custom model locally, feel free to make use of a local HF
 By default, all users of the cluster are limited to 500 GB of file system storage on the cluster. If you need more storage for your project, you can submit an [application](https://airtable.com/appeMGyDPWhtwa3Dw/shrJ5x6XnzqGDx3RV) indicating how much additional storage you need and for how long. We are usually able to provide a decision within 2-3 days.
 
 # Package Management
-## Nix Package Manager
-
-Nix is a package manager for that is supported on any modern operating system, with a wide selection of up-to-date packages. This document is a brief introduction to Nix and how to use it. 
-
-**Note:** Nix support on the cluster is an experimental feature. It could be deprecated in the future. Nix commands are only available on the login node and not on any compute nodes. It is safe to install packages on the login node through Nix.
-
-### How to find packages
-
-Use `nix-search`, an alias for `nix-env -qaP $1`, to search for packages.
-
-Examples
-```bash
-# Search for packages with bash function
-nix-search hello
-> nixpkgs.hello  hello-2.12.1
-```
-
-### How to install packages
-
-Use `nix-install`, a convienient alias for `nix-env -iA nixpkgs.$1`, to install packages.
-
-Examples
-```bash
-# Install a package(s) with bash function
-nix-install hello
-nix-install hello neofetch
-```
-
-### How to list installed packages
-
-Use `nix-list`, an alias for `nix-env -q`, to list installed packges.
-
-Examples
-```bash
-# List installed packages with bash function:
-nix-list
-> hello-2.12.1
-> neofetch-unstable-2021-12-10
-```
-
-### How to remove packages
-
-Use `nix-list` to find a package's full name. Use `nix-remove`, an alias for `nix-env -e $1`, to remove packages.
-
-Examples
-```bash
-# List your packages
-nix-list
-> hello-2.12.1
-> neofetch-unstable-2021-12-10
-
-# Use the full package name to remove it
-nix-remove hello-2.12.1
-> nix-env -e hello-2.12.1
-> uninstalling 'hello-2.12.1'
-> building '/nix/store/j32crjki8lm5cki464036w9ii0qmpn7r-user-environment.drv'...
-```
-
-### How to upgrade packages
-
-Use `nix-list` with find a package's full name. Use `nix-upgrade`, an alias for `nix-env -u $1`, to upgrade packages.
-
-Examples
-```bash
-# Upgrade all packages that are installed
-nix-upgrade 
-
-# List your packages
-nix-list 
-> hello-2.12.1
-> neofetch-unstable-2021-12-10
-
-# Use the full package name to upgrade it
-nix-upgrade hello-2.12.1
-```
-
-### Additional Resources
-
-This tool is powerful and has a lot of functionality that we haven't covered. For more information, about Nix and its value proposition check out the link below.    
-
-[Why Nix?](https://nixos.org/explore.html)
-
-
 ## Install Miniconda or Anaconda
 
 We suggest installing anaconda or miniconda to facilitate installing many other apps on the server. Here's how we installed miniconda.
