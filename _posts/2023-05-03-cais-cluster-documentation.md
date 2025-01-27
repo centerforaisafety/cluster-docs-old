@@ -46,9 +46,9 @@ The cluster is run on Ubuntu 22.04 and is managed using Ansible and Terraform. W
 
 SSH fingerprints:
 ```
-2048 SHA256:AQtXOzqLY1Bzxrzcg/7emNCZPM+oR2UBWB3QvviQq9M watch-tower-login (RSA)
-256 SHA256:QtxZcVFXr0EsnJBfmx/5yhoCmAYSmP43x1nJHS9K78c watch-tower-login (ECDSA)
-256 SHA256:DiFgOsIH1WEUEDn6lg0ImIg7ok5RE+i4R26uxUhXjQA watch-tower-login (ED25519)
+256 SHA256:0i6w5GpD9ZEj8l5ozMNoz9bUDdxnyVtGxGb3hgifchE cais-login-0 (ECDSA)
+256 SHA256:G7MhKrG1EpE4F/OeI+A8+f33+Avq4n78N3w1rRiRWH4 cais-login-0 (ED25519)
+3072 SHA256:OQt+3QcJEYoj53T6JBUIP+Ou3NSY0Qc/SstiNcz4+A0 cais-login-0 (RSA)
 ```
 
 # Getting Started
